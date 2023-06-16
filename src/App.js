@@ -1,4 +1,5 @@
 import NavBar from "./components/NavBar";
+import SetPomodoro from "./components/SetPomodoro";
 import Timer from "./components/Timer";
 
 function App() {
@@ -7,6 +8,7 @@ function App() {
       <div className="h-full w-full md:max-w-4xl flex-col space-y-10">
         <NavBar />
         <Timer/>
+        <SetPomodoro/>
       </div>
     </main>
   );

@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 
 function Timer() {
   return (
@@ -18,7 +18,7 @@ function Timer() {
         <div className="text-9xl font-bold tracking-wider p-2">25:00</div>
 
         <div></div>
-        <button className="text-4xl text-pomodoro bg-white w-72 h-20 rounded-md shadow-md cursor-pointer hover:-translate-y-1 transition duration-300">
+        <button className="text-4xl font-semibold text-pomodoro bg-white w-72 h-20 rounded-md shadow-md cursor-pointer hover:-translate-y-1 transition duration-300">
           START
         </button>
       </div>
@@ -26,4 +26,4 @@ function Timer() {
   );
 }
 
-export default Timer
+export default Timer;
