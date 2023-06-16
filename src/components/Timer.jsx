@@ -17,13 +17,10 @@ function Timer({ timerType, handleTimerTypeChange }) {
   useEffect(() => {
     if (timerType === "Pomodoro") {
       setTime(25 * 60);
-      document.body.style.backgroundColor = "#f3f3f3";
     } else if (timerType === "Short Break") {
       setTime(5 * 60);
-      document.body.style.backgroundColor = "#eef7f0";
     } else if (timerType === "Long Break") {
       setTime(15 * 60);
-      document.body.style.backgroundColor = "#f0f3f7";
     }
   }, [timerType]);
 
@@ -56,6 +53,22 @@ function Timer({ timerType, handleTimerTypeChange }) {
       // Call a function or perform any action when the timer reaches 0
     }
   }, [time]);
+
+  let textBackgroundColor = "";
+  switch (timerType) {
+    case "Pomodoro":
+      textBackgroundColor = "text-pomodoro";
+      break;
+    case "Short Break":
+      textBackgroundColor = "text-shortbreak";
+      break;
+    case "Long Break":
+      textBackgroundColor = "text-longbreak";
+      break;
+    default:
+      textBackgroundColor = "text-pomodoro";
+      break;
+  }
 
   const minutes = Math.floor(time / 60);
   const seconds = time % 60;
@@ -112,7 +125,7 @@ function Timer({ timerType, handleTimerTypeChange }) {
             </div>
           ) : (
             <button
-              className="text-4xl font-semibold text-pomodoro bg-white w-72 h-20 rounded-md shadow-md cursor-pointer hover:-translate-y-1 transition duration-300"
+              className={`text-4xl font-semibold ${textBackgroundColor} bg-white w-72 h-20 rounded-md shadow-md cursor-pointer hover:-translate-y-1 transition duration-300`}
               onClick={handleStart}
             >
               Start
