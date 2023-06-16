@@ -1,9 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 
-function Timer() {
+function Timer({ timerType, handleTimerTypeChange }) {
   const [time, setTime] = useState(25 * 60); // initial time in seconds (25 minutes)
   const [isRunning, setIsRunning] = useState(false);
-  const [timerType, setTimerType] = useState("Pomodoro");
   const timerRef = useRef(null);
 
   useEffect(() => {
@@ -60,10 +59,6 @@ function Timer() {
 
   const minutes = Math.floor(time / 60);
   const seconds = time % 60;
-
-  const handleTimerTypeChange = (newTimerType) => {
-    setTimerType(newTimerType);
-  };
 
   return (
     <div className="w-full h-2/5 p-6">
