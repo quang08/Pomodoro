@@ -1,6 +1,8 @@
 import { useState } from "react";
 import NavBar from "./components/NavBar";
 import Timer from "./components/Timer";
+import Quotes from "./components/Quotes";
+import PamImg from "./components/PamImg";
 
 function App() {
   const [timerType, setTimerType] = useState("Pomodoro");
@@ -30,11 +32,14 @@ function App() {
       className={`flex h-screen justify-center ${appBackgroundColor} text-white`}
     >
       <div className="h-full w-full md:max-w-4xl flex-col space-y-10">
-        <NavBar/>
+        <NavBar />
         <Timer
           timerType={timerType}
           handleTimerTypeChange={handleTimerTypeChange}
         />
+        <Quotes />
+
+        <PamImg />
       </div>
     </main>
   );
