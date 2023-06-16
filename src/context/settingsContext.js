@@ -1,9 +1,15 @@
-import React from 'react'
+import React, { createContext } from "react";
 
-function settingsContext() {
+export const SettingContext = createContext();
+
+function SettingsContextProvider(props) {
+
+    
   return (
-    <div>settingsContext</div>
-  )
+    <SettingContext.Provider value={{}}>
+      {props.children}
+    </SettingContext.Provider>
+  );
 }
 
-export default settingsContext
+export default SettingsContextProvider;
