@@ -122,7 +122,7 @@ function Timer({ timerType, handleTimerTypeChange }) {
                 className="text-4xl font-semibold text-pomodoro bg-white w-72 h-20 rounded-md shadow-md cursor-pointer hover:-translate-y-1 transition duration-300"
                 onClick={handleStop}
               >
-                Stop
+                Reset
               </button>
             </div>
           ) : (

@@ -3,18 +3,6 @@ import Settings from "./Settings";
 
 function NavBar() {
   const [showSettings, setShowSettings] = useState(false);
-  const [timerSettings, setTimerSettings] = useState({
-    pomodoro: 25 * 60, // default value: 25 minutes
-    shortBreak: 5 * 60, // default value: 5 minutes
-    longBreak: 15 * 60, // default value: 15 minutes
-  });
-
-  const handleSettingsSave = (newSettings) => {
-    setTimerSettings(newSettings);
-  };
-
-  
-
   const handleSettingsClick = () => {
     setShowSettings(true);
   };
@@ -63,8 +51,6 @@ function NavBar() {
 
         {showSettings && (
           <Settings
-            timerSettings={timerSettings}
-            onSave={handleSettingsSave}
             onClose={handleCloseSettings}
           />
         )}
