@@ -9,10 +9,15 @@ function App() {
     shortBreak: 5 * 60,
     longBreak: 15 * 60,
   });
-
+ 
   const handleTimerTypeChange = (newTimerType) => {
     setTimerType(newTimerType);
   };
+  
+  const handleSettingsSave = (newSettings) => {
+    setTimerSettings(newSettings);
+  };
+
 
   let appBackgroundColor = "";
   switch (timerType) {
@@ -37,11 +42,10 @@ function App() {
       className={`flex h-screen justify-center ${appBackgroundColor} text-white`}
     >
       <div className="h-full w-full md:max-w-4xl flex-col space-y-10">
-        <NavBar />
+        <NavBar timerSettings={timerSettings} onSave={handleSettingsSave} />
         <Timer
           timerType={timerType}
           handleTimerTypeChange={handleTimerTypeChange}
-          timerSettings={timerSettings}
         />
       </div>
     </main>

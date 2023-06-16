@@ -1,7 +1,9 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
+import { SettingsContext } from "../context/settingsContext";
 
 function Timer({ timerType, handleTimerTypeChange }) {
-  const [time, setTime] = useState(25 * 60); // initial time in seconds (25 minutes)
+  const { timerSettings } = useContext(SettingsContext);
+  const [time, setTime] = useState(timerSettings.pomodoro);
   const [isRunning, setIsRunning] = useState(false);
   const timerRef = useRef(null);
 
@@ -14,15 +16,15 @@ function Timer({ timerType, handleTimerTypeChange }) {
     return stopTimer; // Cleanup function to clear the interval on unmount
   }, [isRunning]);
 
-  useEffect(() => {
-    if (timerType === "Pomodoro") {
-      setTime(25 * 60);
-    } else if (timerType === "Short Break") {
-      setTime(5 * 60);
-    } else if (timerType === "Long Break") {
-      setTime(15 * 60);
-    }
-  }, [timerType]);
+   useEffect(() => {
+     if (timerType === "Pomodoro") {
+       setTime(timerSettings.pomodoro);
+     } else if (timerType === "Short Break") {
+       setTime(timerSettings.shortBreak);
+     } else if (timerType === "Long Break") {
+       setTime(timerSettings.longBreak);
+     }
+   }, [timerType, timerSettings]);
 
   const startTimer = () => {
     timerRef.current = setInterval(() => {

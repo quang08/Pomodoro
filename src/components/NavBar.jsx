@@ -3,6 +3,17 @@ import Settings from "./Settings";
 
 function NavBar() {
   const [showSettings, setShowSettings] = useState(false);
+  const [timerSettings, setTimerSettings] = useState({
+    pomodoro: 25 * 60, // default value: 25 minutes
+    shortBreak: 5 * 60, // default value: 5 minutes
+    longBreak: 15 * 60, // default value: 15 minutes
+  });
+
+  const handleSettingsSave = (newSettings) => {
+    setTimerSettings(newSettings);
+  };
+
+  
 
   const handleSettingsClick = () => {
     setShowSettings(true);
@@ -31,7 +42,10 @@ function NavBar() {
       </div>
 
       <div>
-        <button className="text-white text-lg bg-slate-50/10 p-2 rounded-md flex items-center gap-1 hover:-translate-y-1 transition duration-300" onClick={handleSettingsClick}>
+        <button
+          className="text-white text-lg bg-slate-50/10 p-2 rounded-md flex items-center gap-1 hover:-translate-y-1 transition duration-300"
+          onClick={handleSettingsClick}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
@@ -47,7 +61,13 @@ function NavBar() {
           Settings
         </button>
 
-        {showSettings && <Settings onClose={handleCloseSettings}/>}
+        {showSettings && (
+          <Settings
+            timerSettings={timerSettings}
+            onSave={handleSettingsSave}
+            onClose={handleCloseSettings}
+          />
+        )}
       </div>
     </nav>
   );
