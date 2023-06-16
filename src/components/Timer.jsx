@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef } from "react";
 function Timer() {
   const [time, setTime] = useState(25 * 60); // initial time in seconds (25 minutes)
   const [isRunning, setIsRunning] = useState(false);
+  const [timerType, setTimerType] = useState("Pomodoro");
   const timerRef = useRef(null);
 
   useEffect(() => {
@@ -13,6 +14,19 @@ function Timer() {
     }
     return stopTimer; // Cleanup function to clear the interval on unmount
   }, [isRunning]);
+
+  useEffect(() => {
+    if (timerType === "Pomodoro") {
+      setTime(25 * 60);
+      document.body.style.backgroundColor = "#f3f3f3";
+    } else if (timerType === "Short Break") {
+      setTime(5 * 60);
+      document.body.style.backgroundColor = "#eef7f0";
+    } else if (timerType === "Long Break") {
+      setTime(15 * 60);
+      document.body.style.backgroundColor = "#f0f3f7";
+    }
+  }, [timerType]);
 
   const startTimer = () => {
     timerRef.current = setInterval(() => {
@@ -47,17 +61,36 @@ function Timer() {
   const minutes = Math.floor(time / 60);
   const seconds = time % 60;
 
+  const handleTimerTypeChange = (newTimerType) => {
+    setTimerType(newTimerType);
+  };
+
   return (
     <div className="w-full h-2/5 p-6">
       <div className="bg-slate-50/10 rounded-md h-full w-full flex-col justify-center items-center space-y-10 text-center">
         <div className="text-white w-full flex justify-center p-3 gap-2 cursor-pointer">
-          <p className="bg-slate-950/10 font-medium text-2xl p-2 flex items-center rounded-md">
+          <p
+            className={`font-medium text-2xl p-2 flex items-center rounded-md ${
+              timerType === "Pomodoro" && "bg-slate-950/10"
+            }`}
+            onClick={() => handleTimerTypeChange("Pomodoro")}
+          >
             Pomodoro
           </p>
-          <p className="p-2 flex items-center text-2xl rounded-md">
+          <p
+            className={`p-2 flex items-center text-2xl rounded-md ${
+              timerType === "Short Break" && "bg-slate-950/10"
+            }`}
+            onClick={() => handleTimerTypeChange("Short Break")}
+          >
             Short Break
           </p>
-          <p className="p-2 flex items-center text-2xl rounded-md">
+          <p
+            className={`p-2 flex items-center text-2xl rounded-md ${
+              timerType === "Long Break" && "bg-slate-950/10"
+            }`}
+            onClick={() => handleTimerTypeChange("Long Break")}
+          >
             Long Break
           </p>
         </div>
@@ -65,7 +98,6 @@ function Timer() {
           <span>{minutes.toString().padStart(2, "0")}</span>:
           <span>{seconds.toString().padStart(2, "0")}</span>
         </div>
-
         <div></div>
         <div>
           {isRunning ? (
